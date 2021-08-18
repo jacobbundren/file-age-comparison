@@ -2,7 +2,7 @@
 # File timestamps below are in seconds from epoch
 
 # User input file path
-echo 'Enter file path (with trailing /): '
+echo 'Enter path to .pgp files (without trailing /): '
 read filepath
 
 # 30 days (in seconds)
