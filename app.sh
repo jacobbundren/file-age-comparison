@@ -1,30 +1,28 @@
-#for i in {1..3}
-#do
-#  echo > files/${i}.pgp
-#done
-
 # NOTE:
 # File timestamps below are in seconds from epoch
+
+# User input file path
+echo 'Enter file path (with trailing /): '
+read filepath
 
 # 30 days (in seconds)
 flagAge=$((30*60*60*24))
 # current time (in seconds) from epoch
 nowTimestamp=$(date +%s)
 
-for file in files/*.pgp
+for file in $filepath/*.pgp
 do
   echo $file
   # unix
   #fileTimestamp=$(stat -f "%B" $file)
-  # linux (most likely case. time of last data modification)
-  fileTimestamp=$(stat -c '%y' $file)
+  fileTimestamp=$(stat -c '%Y' $file)
   # age of file
   fileAge=$((nowTimestamp-fileTimestamp))
 
-  if ((flagAge > fileAge))
+  if ((flagAge < fileAge))
   then
     echo $file is old!
-    rm $file
+#    rm $file
   fi
 
 done
